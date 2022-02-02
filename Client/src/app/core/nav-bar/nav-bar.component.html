@@ -1,9 +1,11 @@
-<div class="d-flex flex-column flex-md-row align-items-center justify-content-between mb-4 border-bottom fixed-top bg-light">
-    <img src="/assets/images/logo.png" alt="logo" style="max-height: 70px;">
+<div class="d-flex flex-column flex-md-row fw-bolder align-items-center justify-content-between mb-4 border-bottom fixed-top bg-light">
+    <a  routerLink="/" class="ms-4">
+        <img src="/assets/images/logo.png" alt="logo" style="max-height: 70px;" >
+    </a>
     <nav class="mt-2 mt-md-0 text-uppercase" style="font-size: large;">
-        <a class="me-3 py-2 text-dark text-decoration-none" href="#">Home</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="#">Shop</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="#">Contact</a>
+        <a class="me-3 py-2 text-decoration-none" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <a class="me-3 py-2 text-decoration-none" routerLink="/shop" routerLinkActive="active" >Shop</a>
+        <a class="me-3 py-2 text-decoration-none" href="#">Contact</a>
     </nav>
     <div class="d-flex align-items-center">
         <a class="position-relative">

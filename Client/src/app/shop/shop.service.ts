@@ -5,6 +5,7 @@ import { IPagination } from '../shared/models/pagination';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { IProduct } from '../shared/models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,10 @@ export class ShopService {
     params = params.append('pageSize', shopParams.pageSize.toString());
 
     return this._http.get<IPagination>(this.BASE_URL + 'products', { params: params });
+  }
+
+  getProduct(id: number): Observable<IProduct> {
+    return this._http.get<IProduct>(this.BASE_URL + 'products/' + id);
   }
 
   getBrands(): Observable<IBrand[]> {

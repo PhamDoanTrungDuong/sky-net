@@ -1,7 +1,9 @@
 <div class="card h-100 shadow-sm">
-    <img src="{{ product.pictureUrl }}" alt="{{ product.name }}" class="img-fluid bg-info">
+    <a routerLink="/shop/{{ product.id }}">
+        <img src="{{ product.pictureUrl }}" alt="{{ product.name }}" class="img-fluid bg-info">
+    </a>
     <div class="card-body d-flex flex-column">
-        <a href="#" class="text-decoration-none text-success">
+        <a routerLink="/shop/{{ product.id }}" class="text-decoration-none text-success">
             <h6 class="text-uppercase">{{ product.name }}</h6>
         </a>
         <span class="mb-2 text-primary"><strong>{{ product.price | currency }}</strong></span>
@@ -9,7 +11,7 @@
             additional content. This content is a little bit longer.</p>
         <div class="btn-group mt-auto">
             <button type="button" class="btn btn-outline-secondary fa fa-shopping-cart me-2"></button>
-            <button type="button" class="btn btn-outline-secondary">View</button>
+            <button routerLink="/shop/{{ product.id }}" type="button" class="btn btn-outline-secondary">View</button>
         </div>
     </div>
 </div>
