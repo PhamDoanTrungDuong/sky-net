@@ -9,6 +9,21 @@
 // regular style toast
 @import '~ngx-toastr/toastr';
 
+@import "bootswatch/dist/cosmo/bootstrap.min.css";
+
 /* Importing Font Awesome. */
 //@import "node_modules/font-awesome/css/font-awesome.min.css";
 
+.xng-breadcrumb-root {
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: #f5f5f5;
+    border-radius: 0.25rem;
+    font-weight: bold;
+}
+
+label.xng-breadcrumb-trail {
+    color: rgb(47, 179, 231);
+    text-decoration: underline;
+}

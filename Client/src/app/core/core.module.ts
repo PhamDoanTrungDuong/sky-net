@@ -7,13 +7,15 @@ import { ServerErrorComponent } from './server-error/server-error.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
-
+import { SectionHeaderComponent } from './section-header/section-header.component';
+import {BreadcrumbModule} from 'xng-breadcrumb';
 @NgModule({
   declarations: [
     NavBarComponent,
     TestErrorComponent,
     ServerErrorComponent,
     NotFoundComponent,
+    SectionHeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { ToastrModule, ToastContainerModule } from 'ngx-toastr';
       preventDuplicates: true,
     }),
     ToastContainerModule,
+    BreadcrumbModule,
   ],
-  exports: [NavBarComponent],
+  exports: [NavBarComponent, SectionHeaderComponent],
 })
 export class CoreModule {}

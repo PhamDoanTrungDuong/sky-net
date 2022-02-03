@@ -3,7 +3,7 @@ import { IType } from './../shared/models/productType';
 import { IBrand } from './../shared/models/brand';
 import { ShopService } from './shop.service';
 import { IProduct } from '../shared/models/product';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-shop',
@@ -11,7 +11,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
-  @ViewChild('search', { static: true }) search: any;
+  @ViewChild('search', { static: false }) search: any;
   public products: IProduct[] = [];
   public brands: IBrand[] = [];
   public types: IType[] = [];
