@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using API.Errors;
 using API.Extensions;
+using StackExchange.Redis;
 
 namespace API
 {
@@ -35,6 +36,13 @@ namespace API
 
             //Connection String
             services.AddDbContext<Storecontext>(x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+
+            //Redis
+            services.AddSingleton<IConnectionMultiplexer>(c =>
+            {
+                var configuration = ConfigurationOptions.Parse(_config.GetConnectionString("Redis"), true);
+                return ConnectionMultiplexer.Connect(configuration);
+            });
 
             //services.
             services.AddApplicationServices();
