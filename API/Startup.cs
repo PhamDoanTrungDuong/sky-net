@@ -15,6 +15,7 @@ using System.Linq;
 using API.Errors;
 using API.Extensions;
 using StackExchange.Redis;
+using Infrastructure.Identity;
 
 namespace API
 {
@@ -35,18 +36,20 @@ namespace API
             services.AddControllers();
 
             //Connection String
-            services.AddDbContext<Storecontext>(x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<Storecontext>(x => x.UseSqlite(_config.GetConnectionString("DefaultConnection")));//adds the default sqlite connection
+            services.AddDbContext<AppIdentityDbContext>(x => x.UseSqlite(_config.GetConnectionString("IdentityConnection")));//add identity db context
 
             //Redis
             services.AddSingleton<IConnectionMultiplexer>(c =>
             {
                 var configuration = ConfigurationOptions.Parse(_config.GetConnectionString("Redis"), true);
                 return ConnectionMultiplexer.Connect(configuration);
-            });
+            });//adds the redis connection
 
             //services.
-            services.AddApplicationServices();
-            services.AddSwaggerDocumentation();
+            services.AddApplicationServices();//adds the default application services
+            services.AddIdentityServices(_config);//adds the default identity services
+            services.AddSwaggerDocumentation();//adds the swagger documentation
 
             services.AddCors(opt =>
            {
@@ -54,7 +57,7 @@ namespace API
                {
                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
                });
-           });
+           });//adds the cors policy
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,8 +73,10 @@ namespace API
 
             app.UseStaticFiles();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
-            
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Skynet Web API"));
