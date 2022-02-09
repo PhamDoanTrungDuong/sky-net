@@ -7,12 +7,33 @@
         <a class="me-3 py-2 text-decoration-none" routerLink="/shop" routerLinkActive="active" >Shop</a>
         <a class="me-3 py-2 text-decoration-none" routerLink="/test-error" routerLinkActive="active">Errors</a>
     </nav>
-    <div class="d-flex align-items-center">
+    <div class="d-flex align-items-center me-4">
         <a routerLink="/basket" class="position-relative">
             <i class="fa fa-shopping-cart fa-2x text-dark me-5"></i>
-            <div *ngIf="(basket$ | async) as basket " class="cart-no">{{ basket.items.length }}</div>
+            <div *ngIf="(basket$ | async) as basket " class="cart-no">{{ (basket$ | async)?.items?.length }}</div>
         </a>
-        <a href="#" class="btn btn-outline-dark me-2">Login</a>
-        <a href="#" class="btn btn-outline-dark me-3">Sign Up</a>
+        <ng-container *ngIf="(currentUser$ | async) === null" >
+            <a routerLink="account/login"  class="btn btn-outline-dark me-2">Login</a> 
+            <a routerLink="account/register" class="btn btn-outline-dark me-3">Sign Up</a>
+        </ng-container>
+        <ng-container *ngIf="(currentUser$ | async) as user" >
+            <div class="dropdown ml-3 mr-5" dropdown>
+                <a class="dropdown-toggle" style="cursor: pointer;" dropdownToggle>
+                  <strong>Welcome, <span class="text-info">{{(currentUser$ | async)?.displayName}}</span></strong>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" style="cursor:pointer" *dropdownMenu>
+                  <a routerLink="/basket" class="dropdown-item d-flex align-items-center py-2">
+                    <i class="fa fa-shopping-cart me-3"></i> View Basket
+                  </a>
+                  <a routerLink="/orders" class="dropdown-item d-flex align-items-center py-2">
+                    <i class="fa fa-history me-3"></i> View Orders
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a  (click)="logout()" class="dropdown-item d-flex align-items-center py-2">
+                    <i class="fa fa-sign-out me-3"></i> Logout
+                  </a>
+                </div>
+              </div>
+        </ng-container>
     </div>
 </div>
