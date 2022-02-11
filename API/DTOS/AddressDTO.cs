@@ -18,7 +18,7 @@ namespace API.DTOS
         public string State { get; set; }
         [Required]
         public string Zipcode { get; set; }
-        [Required]
+        
         public string AppUserId { get; set; }
 
     }
