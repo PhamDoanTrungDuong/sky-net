@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { IAddress } from '../shared/models/address';
 @Injectable({
   providedIn: 'root'
 })
@@ -68,9 +69,12 @@ export class AccountService {
     return this._http.get<boolean>(this.baseUrl + 'account/emailexists?email=' + email);
   }
 
+  getUserAddress() {
+    return this._http.get<IAddress>(this.baseUrl + 'account/address');
+  }
 
-
-
-
+  updateUserAddress(address: IAddress) {
+    return this._http.put<IAddress>(this.baseUrl + 'account/address', address);
+  }
 
 }

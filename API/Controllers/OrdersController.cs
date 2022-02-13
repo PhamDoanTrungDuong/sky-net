@@ -27,15 +27,15 @@ namespace API.Controllers
         {
             var email = HttpContext.User.RetriveEmailFromPincipal();
 
-            var address = _mapper.Map<AddressDTO, Address>(orderDto.ShipToAddress); 
-            
+            var address = _mapper.Map<AddressDTO, Address>(orderDto.ShipToAddress);
+
             var order = await _orderService.CreateOrderAsync(email, orderDto.DeliveryMethodId, orderDto.BasketId, address);
 
-            if(order == null) return BadRequest(new ApiRespone(400, "Problem creating order"));
-            
+            if (order == null) return BadRequest(new ApiRespone(400, "Problem creating order"));
+
             return Ok(order);
         }
-         [HttpGet]
+        [HttpGet]
         public async Task<ActionResult<IReadOnlyList<OrderDTO>>> GetOrdersForUser()
         {
             var email = User.RetriveEmailFromPincipal();
