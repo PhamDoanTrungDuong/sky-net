@@ -1,7 +1,7 @@
 <ng-container *ngIf="items.length > 0" >
     <div class="table-responsive">
-        <table class="table table-hover">
-            <thead [class.thead-light]="isBasket || isOrder" class="border-0 py-2">
+        <table class="table table-borderless">
+            <thead [class.table-secondary]="isBasket || isOrder" class="border-0 py-2">
                 <tr>
                     <th scope="col" >
                         <div class="p-2 px-3 text-uppercase">Product</div>
@@ -10,13 +10,13 @@
                         <div class="py-2 text-uppercase">Price</div>
                     </th>
                     <th scope="col">
-                        <div class="py-2 text-uppercase">Quantity</div>
+                        <div class="py-2 text-uppercase" [class.text-center]="!isBasket">Quantity</div>
                     </th>
                     <th scope="col">
                         <div class="py-2 text-uppercase">Total</div>
                     </th>
                     <th *ngIf="isBasket" scope="col" class="border-0">
-                        <div class="py-2 text-uppercase">Remove</div>
+                        <div class="py-2 text-uppercase text-center">Remove</div>
                     </th>
                 </tr>
             </thead>
@@ -25,7 +25,7 @@
                     <th scope="row">
                         <div class="p-2">
                             <img src="{{item.pictureUrl}}" alt="{{item.productName}}"
-                                class="img-fluid" style="max-height: 50px;">
+                                class="img-fluid" style="max-height: 50px; border: 1px solid;">
                             <div class="ms-3 d-inline-block align-middle">
                                 <h5 class="mb-0">
                                     <a routerLink="/shop/{{item.id}}"

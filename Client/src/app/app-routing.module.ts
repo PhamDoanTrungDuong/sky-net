@@ -1,3 +1,4 @@
+import { OrdersComponent } from './orders/orders.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { NotFoundComponent } from './core/not-found/not-found.component';
@@ -42,6 +43,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./checkout/checkout.module').then((mod) => mod.CheckoutModule),
     data: { breadcrumb: 'Checkout' },
+  },
+  {
+    path: 'orders',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./orders/orders.module').then((mod) => mod.OrdersModule), 
+    data: { breadcrumb: 'Orders' },
   },
   {
     path: 'account',

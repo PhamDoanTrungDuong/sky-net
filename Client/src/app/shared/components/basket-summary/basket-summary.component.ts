@@ -1,3 +1,4 @@
+import { IOrderItem } from './../../models/order';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IBasketItem } from '../../models/basket';
 

@@ -10,9 +10,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class OrderTotalsComponent implements OnInit {
   basketTotal$!: Observable<IBasketTotal | null>;
-  @Input() shippingPrice: number = 0;
-  @Input() subtotal: number = 0;
-  @Input() total: number = 0;
+  @Input() shippingPrice?: number = 0;
+  @Input() subtotal?: number = 0;
+  @Input() total?: number = 0;
   constructor(private __basketService: BasketService) { }
 
   ngOnInit(): void {
