@@ -8,7 +8,7 @@ import { IBasketTotal } from '../shared/models/basket';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss']
+  styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent implements OnInit {
   checkoutForm!: FormGroup;
@@ -17,17 +17,21 @@ export class CheckoutComponent implements OnInit {
   @Input() subtotal: number = 0;
   @Input() total: number = 0;
 
-  constructor(private _basketService: BasketService,private _fb: FormBuilder, private _accountService: AccountService) { }
+  constructor(
+    private _basketService: BasketService,
+    private _fb: FormBuilder,
+    private _accountService: AccountService
+  ) {}
 
   ngOnInit(): void {
     this.createCheckoutForm();
     this.getAddressFormValues();
-    // this.getDeliveryMethodValue();
+    this.getDeliveryMethodValue();
     this.basketTotal$ = this._basketService.basketTotal$;
   }
 
   createCheckoutForm() {
-    console.log('createCheckoutForm');
+    //console.log('createCheckoutForm');
     this.checkoutForm = this._fb.group({
       addressForm: this._fb.group({
         fisrtName: [null, Validators.required],
@@ -35,31 +39,37 @@ export class CheckoutComponent implements OnInit {
         street: [null, Validators.required],
         city: [null, Validators.required],
         state: [null, Validators.required],
-        zipCode: [null, Validators.required],
+        zipcode: [null, Validators.required],
       }),
       deliveryForm: this._fb.group({
-        deliveryMethod: [null, Validators.required]
+        deliveryMethod: [null, Validators.required],
       }),
       paymentForm: this._fb.group({
-        nameOnCard: [null, Validators.required]
-      })
-    })
+        nameOnCard: [null, Validators.required],
+      }),
+    });
   }
 
   getAddressFormValues() {
-    this._accountService.getUserAddress().subscribe(address => {
-      if (address) {
-        this.checkoutForm.get('addressForm')?.patchValue(address);
+    this._accountService.getUserAddress().subscribe(
+      (address) => {
+        if (address) {
+          this.checkoutForm.get('addressForm')?.patchValue(address);
+        }
+      },
+      (error) => {
+        console.log(error);
       }
-    }, error => {
-      console.log(error);
-    })
+    );
   }
 
   getDeliveryMethodValue() {
     const basket = this._basketService.getCurrentBasketValue();
     if (basket?.deliveryMethodId !== null) {
-      this.checkoutForm.get('deliveryForm')?.get('deliveryMethod')?.patchValue(basket?.deliveryMethodId?.toString());
+      this.checkoutForm
+        .get('deliveryForm')
+        ?.get('deliveryMethod')
+        ?.patchValue(basket?.deliveryMethodId?.toString());
     }
   }
 }
