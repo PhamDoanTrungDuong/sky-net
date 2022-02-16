@@ -1,0 +1,22 @@
+.list-group-item {
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+
+    &:focus {
+        outline: none;
+    }
+
+    &.active {
+        background-color: rgb(127, 178, 255);
+        border-radius: 10px;
+    }
+
+    &:not(.active):hover {
+        color: #fff;
+        background-color: rgba(156, 192, 247, 0.705);
+        transition: 0.5s;
+        border-radius: 10px;
+    }
+}
